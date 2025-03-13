@@ -32,6 +32,12 @@
                 </a>
             </li>
             <li>
+                <a href="/dokter" class="{{ request()->is('dokter*') ? 'flex items-center px-4 py-2.5 text-gray-700 bg-green-100 hover:bg-green-200 rounded-lg transition-colors group' : 'flex items-center px-4 py-2.5 text-gray-600 hover:bg-green-50 hover:text-gray-800 rounded-lg transition-colors group' }}">
+                    <i class="fas fa-user-md w-5 h-5 mr-3 {{ request()->is('dokter*') ? 'text-green-600' : 'text-gray-500 group-hover:text-green-600' }} transition-colors"></i>
+                    <span class="{{ request()->is('dokter*') ? 'font-medium' : '' }}">Dokter</span>
+                </a>
+            </li>
+            <li>
                 <a href="/appointments" class="flex items-center px-4 py-2.5 text-gray-600 hover:bg-green-50 hover:text-gray-800 rounded-lg transition-colors group">
                     <i class="fas fa-calendar-check w-5 h-5 mr-3 text-gray-500 group-hover:text-green-600 transition-colors"></i>
                     <span>Jadwal Kunjungan</span>
@@ -42,7 +48,7 @@
                     <i class="fas fa-notes-medical w-5 h-5 mr-3 text-gray-500 group-hover:text-green-600 transition-colors"></i>
                     <span>Rekam Medis</span>
                 </a>
-            </li>
+            </li>   
             <li>
                 <button @click="activeDropdown = activeDropdown === 'services' ? null : 'services'" class="w-full flex items-center justify-between px-4 py-2.5 text-gray-600 hover:bg-green-50 hover:text-gray-800 rounded-lg transition-colors group">
                     <div class="flex items-center">

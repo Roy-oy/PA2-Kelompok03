@@ -58,7 +58,7 @@
     <!-- Patient Information Cards -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Patient Profile Card -->
-        {{-- <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
             <div class="bg-gradient-to-r from-green-500 to-green-600 px-6 py-6">
                 <div class="flex justify-center mb-4">
                     <div class="h-28 w-28 rounded-full bg-white flex items-center justify-center border-4 border-white shadow-md">
@@ -138,7 +138,7 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
 
         <!-- Main Information -->
         <div class="lg:col-span-2">
