@@ -53,7 +53,7 @@
                 
                 <!-- Form Sections -->
                 <div class="grid grid-cols-1 gap-8">
-                    <!-- Personal Information Section -->
+                    <!-- Informasi Pribadi -->
                     <div>
                         <h3 class="text-lg font-medium text-gray-800 mb-3 pb-2 border-b border-gray-200">
                             <i class="fas fa-user text-amber-600 mr-2"></i>
