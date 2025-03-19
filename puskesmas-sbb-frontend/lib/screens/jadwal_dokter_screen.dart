@@ -6,7 +6,7 @@ class JadwalDokterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Map<String, String>> jadwalDokter = [
-      {"dokter": "dr. Andi", "hari": "Senin - Rabu", "jam": "08:00 - 12:00"},
+      {"dokter": "dr. Grace Laurent", "hari": "Senin - Rabu", "jam": "08:00 - 12:00"},
       {"dokter": "dr. Siti", "hari": "Kamis - Sabtu", "jam": "09:00 - 13:00"},
     ];
 
