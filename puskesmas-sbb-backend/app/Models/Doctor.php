@@ -9,7 +9,10 @@ class Doctor extends Model
 {
     use HasFactory;
 
+    // Nama tabel yang digunakan
     protected $table = 'doctors';
+
+    // Kolom yang dapat diisi secara massal
     protected $fillable = [
         'nama',
         'spesialisasi',
@@ -29,21 +32,22 @@ class Doctor extends Model
         'status' => 'string',
     ];
 
+    // Accessor untuk menghitung umur berdasarkan tanggal lahir
     public function getUmurAttribute()
     {
-        return $this->tanggal_lahir->age . ' tahun';
+        return $this->tanggal_lahir ? $this->tanggal_lahir->age . ' tahun' : null;
     }
 
     /**
      * Relasi ke tabel lain
      */
 
-    // 1. Relasi dengan tabel jadwal dokter (One-to-Many)
+    // Relasi dengan tabel jadwal dokter (One-to-Many)
     public function schedules()
     {
         return $this->hasMany(DoctorSchedule::class, 'doctor_id');
     }
-
+    
     // 2. Relasi dengan rekam medis pasien (One-to-Many)
     public function medicalRecords()
     {

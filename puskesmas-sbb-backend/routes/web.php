@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClusterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\DoctorScheduleController;
 use App\Http\Controllers\PasienController;
 
 // Authentication Routes
@@ -24,4 +26,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('pasien', PasienController::class);
     // Dokter Routes (CRUD)
     Route::resource('dokter', DoctorController::class);
+
+    Route::resource('jadwal_dokter', DoctorScheduleController::class);
+
+    Route::resource('klaster', ClusterController::class);
 });

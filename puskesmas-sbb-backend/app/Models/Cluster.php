@@ -1,0 +1,29 @@
+<?php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Cluster extends Model
+{
+    use HasFactory;
+
+    // Nama tabel yang digunakan
+    protected $table = 'clusters';
+
+    // Kolom yang dapat diisi secara massal
+    protected $fillable = [
+        'name',
+        'description',
+    ];
+
+    /**
+     * Relasi ke tabel lain
+     */
+
+    // Relasi dengan tabel jadwal dokter (One-to-Many)
+    public function schedules()
+    {
+        return $this->hasMany(DoctorSchedule::class, 'cluster_id');
+    }
+}
