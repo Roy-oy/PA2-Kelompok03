@@ -1,0 +1,2 @@
+D:/KULIAH KU/SEMESTER 4/PA 2/pa/PA2-Kelompok03/puskesmas-sbb-frontend/android/app/.cxx/Debug/4s4c6d22/x86/CMakeFiles/edit_cache.dir
+D:/KULIAH KU/SEMESTER 4/PA 2/pa/PA2-Kelompok03/puskesmas-sbb-frontend/android/app/.cxx/Debug/4s4c6d22/x86/CMakeFiles/rebuild_cache.dir
