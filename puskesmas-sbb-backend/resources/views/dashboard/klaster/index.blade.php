@@ -73,7 +73,7 @@
                                 {{ $loop->iteration }}
                             </td>
                             <td class="py-4 px-4 text-sm text-gray-900 font-medium whitespace-nowrap">
-                                {{ $cluster->name }}
+                                {{ $cluster->nama }}
                             </td>
                             <td class="py-4 px-4 text-sm text-gray-500 whitespace-nowrap">
                                 {{ $cluster->description ?? 'Tidak ada deskripsi' }}

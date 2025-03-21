@@ -10,10 +10,31 @@ use Illuminate\Support\Facades\Validator;
 
 class DoctorScheduleController extends Controller
 {
+    private function getDayName($day)
+    {
+        $days = [
+            1 => 'Senin',
+            2 => 'Selasa',
+            3 => 'Rabu',
+            4 => 'Kamis',
+            5 => 'Jumat',
+            6 => 'Sabtu',
+            7 => 'Minggu'
+        ];
+        
+        return $days[$day] ?? '';
+    }
+
     public function index()
     {
-        // Ambil data jadwal dokter dengan relasi dokter dan cluster
         $doctor_schedules = DoctorSchedule::with(['doctor', 'cluster'])->latest()->paginate(7);
+        
+        // Transform numeric days to day names
+        $doctor_schedules->getCollection()->transform(function ($schedule) {
+            $schedule->day_of_week = $this->getDayName($schedule->day_of_week);
+            return $schedule;
+        });
+
         return view('dashboard.jadwal_dokter.index', compact('doctor_schedules'));
     }
 

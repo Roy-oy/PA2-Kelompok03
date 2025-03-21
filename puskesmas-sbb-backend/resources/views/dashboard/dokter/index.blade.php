@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@php
+    use Illuminate\Support\Facades\Storage;
+@endphp
 
 @section('title', 'Daftar Dokter')
 @section('page_title', 'Daftar Dokter')
@@ -90,15 +93,34 @@
                                     {{ $dokter->umur }} tahun
                                 </div>
                             </td>
-                            <td class="py-4 px-4 text-sm text-center">
-                                <img src="{{ asset('storage/' . $dokter->foto_profil) }}" 
-                                     alt="Foto {{ $dokter->nama }}" 
-                                     class="w-12 h-12 rounded-full object-cover mx-auto">
+                            <td class="py-4 px-4 text-sm text-gray-500 whitespace-nowrap">
+                                @if($dokter->foto_profil)
+                                    @php
+                                        $photoPath = asset('storage/' . $dokter->foto_profil);
+                                        \Log::info('Doctor ID: ' . $dokter->id);
+                                        \Log::info('Photo path in DB: ' . $dokter->foto_profil);
+                                        \Log::info('Generated URL: ' . $photoPath);
+                                        \Log::info('File exists: ' . (file_exists(public_path('storage/' . $dokter->foto_profil)) ? 'Yes' : 'No'));
+                                        \Log::info('Full path: ' . public_path('storage/' . $dokter->foto_profil));
+                                    @endphp
+                                    <div class="w-20 h-20 overflow-hidden rounded-lg">
+                                        <img src="{{ $photoPath }}" alt="Foto Profil {{ $dokter->nama }}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIGZpbGw9IiNFMkUyRTIiLz48cGF0aCBkPSJNMTIgMkM2LjQ4IDIgMiA2LjQ4IDIgMTJzNC40OCAxMCAxMCAxMCAxMC00LjQ4IDEwLTEwUzE3LjUyIDIgMTIgMnptMCAzYzEuNjYgMCAzIDEuMzQgMyAzcy0xLjM0IDMtMyAzLTMtMS4zNC0zLTMgMS4zNC0zIDMtM3ptMCAxNC4yYy0yLjUgMC00LjcxLTEuMjgtNi0zLjIyLjAzLTEuOTkgNC0zLjA4IDYtMy4wOCAxLjk5IDAgNS45NyAxLjA5IDYgMy4wOC0xLjI5IDEuOTQtMy41IDMuMjItNiAzLjIyeiIgZmlsbD0iIzk5OSIvPjwvc3ZnPg==';">
+                                    </div>
+                                @else
+                                    <div class="w-20 h-20 bg-gray-200 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-user text-gray-400 text-2xl"></i>
+                                    </div>
+                                @endif
                             </td>
                             <td class="py-4 px-4 text-sm text-center">
-                                <span class="px-3 py-1 rounded-full text-xs font-semibold 
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold flex items-center justify-center w-24 mx-auto
                                     {{ $dokter->status == 'active' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
-                                    {{ ucfirst($dokter->status) }}
+                                    @if($dokter->status == 'active')
+                                        <span class="w-2 h-2 bg-green-500 rounded-full mr-1.5 animate-pulse"></span>
+                                    @else
+                                        <span class="w-2 h-2 bg-red-500 rounded-full mr-1.5"></span>
+                                    @endif
+                                    {{ $dokter->status == 'active' ? 'Aktif' : 'Non-Aktif' }}
                                 </span>
                             </td>
                             <td class="py-4 px-4 text-sm text-center whitespace-nowrap">
@@ -126,7 +148,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="6" class="py-8 text-center">
+                            <td colspan="8" class="py-8 text-center">
                                 <div class="flex flex-col items-center justify-center">
                                     <i class="fas fa-user-slash text-gray-300 text-5xl mb-4"></i>
                                     <p class="text-gray-500 text-lg">Belum ada data dokter</p>

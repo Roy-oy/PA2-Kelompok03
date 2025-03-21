@@ -6,38 +6,26 @@
 
 @section('content')
 <div class="px-4 py-5">
+    <!-- Page Header -->
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
         <div class="flex items-center mb-4 md:mb-0">
             <a href="{{ route('dokter.index') }}" class="mr-3 text-gray-500 hover:text-gray-700 transition-colors">
                 <i class="fas fa-arrow-left"></i>
             </a>
-            <h1 class="text-2xl font-bold text-gray-800 flex items-center">
-                <i class="fas fa-user-md text-green-600 mr-3"></i>
-                {{ $dokter->nama }}
-            </h1>
-            <span class="ml-3 bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
-                NO_STR: {{ $dokter->no_str }}
+            <h1 class="text-2xl font-bold text-gray-800">{{ $dokter->nama }}</h1>
+            <span class="ml-3 px-3 py-1 text-sm bg-{{ $dokter->status == 'active' ? 'green' : 'red' }}-100 text-{{ $dokter->status == 'active' ? 'green' : 'red' }}-800 rounded-full">
+                {{ $dokter->status == 'active' ? 'Aktif' : 'Non-Aktif' }}
             </span>
         </div>
         <div class="flex items-center space-x-3">
-            <a href="{{ route('dokter.edit', $dokter->id) }}" class="inline-flex items-center px-4 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors focus:ring-4 focus:ring-amber-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                </svg>
+            <a href="{{ route('dokter.edit', $dokter->id) }}" class="inline-flex items-center px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors">
+                <i class="fas fa-edit mr-2"></i>
                 Edit Data
             </a>
-            <button type="button" id="delete-button" class="inline-flex items-center px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors focus:ring-4 focus:ring-red-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
+            <button type="button" id="delete-button" class="inline-flex items-center px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">
+                <i class="fas fa-trash mr-2"></i>
                 Hapus Data
             </button>
-            <a href="{{ route('dokter.index') }}" class="inline-flex items-center px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors focus:ring-4 focus:ring-green-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-                </svg>
-                Daftar Dokter
-            </a>
         </div>
     </div>
 
@@ -53,114 +41,125 @@
         </button>
     </div>
     @endif
-    
-    <!-- Informasi Dokter -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Profile Dokter -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
-            <div class="bg-gradient-to-r from-green-500 to-green-600 px-6 py-6">
-                <div class="flex justify-center mb-4">
-                    <div class="h-28 w-28 rounded-full bg-white flex items-center justify-center border-4 border-white shadow-md">
-                        <i class="fas {{ $dokter->jenis_kelamin == 'Laki-laki' ? 'fa-male text-blue-500' : 'fa-female text-pink-500' }} text-5xl"></i>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Left Column - Profile Photo -->
+        <div class="lg:col-span-4">
+            <!-- Profile Photo Card -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-6">
+                <div class="p-6">
+                    <div class="flex flex-col items-center">
+                        @if($dokter->foto_profil)
+                            <div class="h-96 w-full overflow-hidden border border-gray-200">
+                                <img src="{{ asset('storage/' . $dokter->foto_profil) }}" alt="Foto {{ $dokter->nama }}" class="h-full w-full object-contain">
+                            </div>
+                        @else
+                            <div class="h-96 w-full bg-gray-100 flex items-center justify-center border border-gray-200">
+                                <i class="fas {{ $dokter->jenis_kelamin == 'Laki-laki' ? 'fa-male' : 'fa-female' }} text-6xl text-gray-400"></i>
+                            </div>
+                        @endif
                     </div>
-                </div>
-                <h2 class="text-xl font-bold text-white text-center mb-1">{{ $dokter->nama }}</h2>
-                <div class="flex justify-center mt-2">
-                    <span class="px-3 py-1 text-xs bg-white bg-opacity-25 text-white rounded-full flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
-                        </svg>
-                        NO_STR: {{ $dokter->no_str }}
-                    </span>
                 </div>
             </div>
-            <div class="p-6">
-                <div class="space-y-4">
-                    <div class="flex items-center text-sm">
-                        <div class="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                            <i class="fas {{ $dokter->jenis_kelamin == 'Laki-laki' ? 'fa-mars text-blue-500' : 'fa-venus text-pink-500' }}"></i>
+
+            <!-- Contact Card -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-800">Kontak</h3>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        @if($dokter->no_telepon)
+                        <div class="flex items-center">
+                            <i class="fas fa-phone text-gray-400 w-5"></i>
+                            <a href="tel:{{ $dokter->no_telepon }}" class="text-gray-600 hover:text-gray-900 ml-3">{{ $dokter->no_telepon }}</a>
                         </div>
-                        <div>
-                            <p class="text-xs text-gray-500 uppercase tracking-wide">Jenis Kelamin</p>
-                            <p class="font-medium text-gray-800">{{ $dokter->jenis_kelamin }}</p>
+                        @endif
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope text-gray-400 w-5"></i>
+                            <a href="mailto:{{ $dokter->email }}" class="text-gray-600 hover:text-gray-900 ml-3">{{ $dokter->email }}</a>
                         </div>
-                    </div>
-                    <div class="flex items-center text-sm">
-                        <div class="w-9 h-9 rounded-full bg-green-100 flex items-center justify-center mr-3">
-                            <i class="fas fa-calendar-alt text-green-500"></i>
+                        @if($dokter->alamat)
+                        <div class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-gray-400 w-5 mt-1"></i>
+                            <span class="text-gray-600 ml-3">{{ $dokter->alamat }}</span>
                         </div>
-                        <div>
-                            <p class="text-xs text-gray-500 uppercase tracking-wide">Tanggal Lahir</p>
-                            <p class="font-medium text-gray-800">{{ $dokter->tanggal_lahir->format('d F Y') }}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center text-sm">
-                        <div class="w-9 h-9 rounded-full bg-purple-100 flex items-center justify-center mr-3">
-                            <i class="fas fa-birthday-cake text-purple-500"></i>
-                        </div>
-                        <div>
-                            <p class="text-xs text-gray-500 uppercase tracking-wide">Umur</p>
-                            <p class="font-medium text-gray-800">{{ $dokter->umur }} tahun</p>
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Main Information -->
-        <div class="lg:col-span-2">
-            <div class="bg-white rounded-xl shadow-md overflow-hidden mb-6 border border-gray-100">
-                <div class="border-b border-gray-200 px-6 py-4 bg-gray-50/80">
-                    <h3 class="text-lg font-semibold text-gray-800 flex items-center">
-                        <i class="fas fa-info-circle text-blue-500 mr-2"></i>
-                        Informasi Pribadi
-                    </h3>
+        <!-- Right Column - Detailed Information -->
+        <div class="lg:col-span-8">
+            <!-- Combined Information -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-6">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-800">Informasi Dokter</h3>
                 </div>
-                <div class="px-6 py-5">
-                    <dl class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-6">
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <dt class="text-sm font-medium text-gray-500 flex items-center mb-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                                </svg>
-                                Alamat
-                            </dt>
-                            <dd class="mt-1 text-gray-900">{{ $dokter->alamat }}</dd>
+                            <h4 class="text-sm font-medium text-gray-500 uppercase mb-2">Nama Lengkap</h4>
+                            <p class="text-gray-900 font-semibold text-base">{{ $dokter->nama }}</p>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500 flex items-center mb-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a2 2 0 11-4 0V6m4 5V6a2 2 0 10-4 0m4 5a6 6 0 11-12 0v-1m0 0V6a2 2 0 10-4 0v5m4 0a6 6 0 1012 0" />
-                                </svg>
-                                Spesialisasi
-                            </dt>
-                            <dd class="mt-1 text-gray-900">{{ $dokter->spesialisasi }}</dd>
+                            <h4 class="text-sm font-medium text-gray-500 uppercase mb-2">Spesialisasi</h4>
+                            <p class="text-gray-900 font-semibold text-base">{{ $dokter->spesialisasi }}</p>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500 flex items-center mb-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M12 22a10 10 0 100-20 10 10 0 000 20z" />
-                                </svg>
-                                Berstatus
-                            </dt>
-                            <dd class="mt-1 text-gray-900">{{ $dokter->status }}</dd>
+                            <h4 class="text-sm font-medium text-gray-500 uppercase mb-2">Nomor STR</h4>
+                            <p class="text-gray-900 font-semibold text-base">{{ $dokter->no_str }}</p>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500 flex items-center mb-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                                </svg>
-                                Nomor Telepon
-                            </dt>
-                            <dd class="mt-1 text-gray-900">
-                                @if($dokter->no_telepon)
-                                    <a href="tel:{{ $dokter->no_telepon }}" class="text-blue-600 hover:underline">{{ $dokter->no_telepon }}</a>
-                                @else
-                                    <span class="text-gray-400">-</span>
-                                @endif
-                            </dd>
+                            <h4 class="text-sm font-medium text-gray-500 uppercase mb-2">Jenis Kelamin</h4>
+                            <p class="text-gray-900 font-semibold text-base">{{ $dokter->jenis_kelamin }}</p>
                         </div>
-                    </dl>
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-500 uppercase mb-2">Status Akun</h4>
+                            <p class="text-gray-900 font-semibold text-base">{{ $dokter->user ? 'Terdaftar' : 'Belum memiliki akun' }}</p>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-500 uppercase mb-2">Tanggal Lahir</h4>
+                            <p class="text-gray-900 font-semibold text-base">{{ $dokter->tanggal_lahir->format('d F Y') }}</p>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-500 uppercase mb-2">Umur</h4>
+                            <p class="text-gray-900 font-semibold text-base">{{ $dokter->umur }} tahun</p>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-500 uppercase mb-2">Terdaftar Sejak</h4>
+                            <p class="text-gray-900 font-semibold text-base">{{ $dokter->created_at->format('d M Y') }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Schedule Information -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-800">Jadwal Praktek</h3>
+                </div>
+                <div class="p-6">
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-exclamation-circle text-yellow-400"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm text-yellow-700">
+                                    Informasi jadwal praktek dokter belum tersedia. Jadwal akan ditampilkan setelah diperbaharui oleh administrator.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center mt-4">
+                        <a href="#" class="inline-flex items-center px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors">
+                            <i class="fas fa-calendar-plus mr-2"></i>
+                            Tambah Jadwal Praktek
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -170,10 +169,7 @@
 <!-- Delete Confirmation Modal -->
 <div id="delete-modal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <!-- Background overlay -->
         <div id="modal-backdrop" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-        
-        <!-- Modal panel -->
         <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div class="sm:flex sm:items-start">
@@ -212,19 +208,16 @@
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Delete confirmation modal
         const modal = document.getElementById('delete-modal');
         const modalBackdrop = document.getElementById('modal-backdrop');
         const cancelBtn = document.getElementById('cancel-btn');
         const deleteButton = document.getElementById('delete-button');
         
-        // Open modal
         deleteButton.addEventListener('click', function() {
             modal.classList.remove('hidden');
             document.body.classList.add('overflow-hidden');
         });
         
-        // Close modal
         function closeModal() {
             modal.classList.add('hidden');
             document.body.classList.remove('overflow-hidden');

@@ -39,7 +39,7 @@
             </li>
             <li>
                 <a href="/jadwal_dokter" class="{{ request()->is('jadwal_dokter*') ? 'flex items-center px-4 py-2.5 text-gray-700 bg-green-100 hover:bg-green-200 rounded-lg transition-colors group' : 'flex items-center px-4 py-2.5 text-gray-600 hover:bg-green-50 hover:text-gray-800 rounded-lg transition-colors group' }}">
-                    <i class="fas fa-user-md w-5 h-5 mr-3 {{ request()->is('jadwal_dokter*') ? 'text-green-600' : 'text-gray-500 group-hover:text-green-600' }} transition-colors"></i>
+                    <i class="fas fa-calendar-alt w-5 h-5 mr-3 {{ request()->is('jadwal_dokter*') ? 'text-green-600' : 'text-gray-500 group-hover:text-green-600' }} transition-colors"></i>
                     <span class="{{ request()->is('jadwal_dokter*') ? 'font-medium' : '' }}">Jadwal_Dokter</span>
                 </a>
             </li>
@@ -59,7 +59,7 @@
                 </button>
                 <div x-show="activeDropdown === 'services'" x-collapse class="pl-12 pr-3 py-1 mt-1 space-y-1">
                     <a href="/klaster" class="{{ request()->is('klaster*') ? 'flex items-center px-4 py-2.5 text-gray-700 bg-green-100 hover:bg-green-200 rounded-lg transition-colors group' : 'flex items-center px-4 py-2.5 text-gray-600 hover:bg-green-50 hover:text-gray-800 rounded-lg transition-colors group' }}">
-                        <i class="fas fa-user-md w-5 h-5 mr-3 {{ request()->is('klaster*') ? 'text-green-600' : 'text-gray-500 group-hover:text-green-600' }} transition-colors"></i>
+                        <i class="fas fa-layer-group w-5 h-5 mr-3 {{ request()->is('klaster*') ? 'text-green-600' : 'text-gray-500 group-hover:text-green-600' }} transition-colors"></i>
                         <span class="{{ request()->is('klaster*') ? 'font-medium' : '' }}">Klaster</span>
                     </a>
                     <a href="/laboratory" class="block py-2 px-3 text-sm text-gray-600 hover:bg-green-50 hover:text-green-700 rounded-lg transition-colors">

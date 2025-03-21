@@ -13,8 +13,18 @@ class Cluster extends Model
 
     // Kolom yang dapat diisi secara massal
     protected $fillable = [
-        'name',
+        'nama',
         'description',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+
+    protected $casts = [
+        'nama' => 'string', // Cast nama as string
     ];
 
     /**

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Doctor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class DoctorController extends Controller
 {
@@ -65,8 +67,11 @@ class DoctorController extends Controller
         // Simpan foto profil jika ada
         if ($request->hasFile('foto_profil')) {
             $filename = time() . '_' . $request->file('foto_profil')->getClientOriginalName();
-            $request->file('foto_profil')->move(public_path('profile_dokter'), $filename);
-            $doctor->foto_profil = $filename;
+            $path = $request->file('foto_profil')->storeAs('doctors', $filename, 'public');
+            Log::info('Storing photo: ' . $path);
+            Log::info('File exists: ' . (Storage::disk('public')->exists($path) ? 'Yes' : 'No'));
+            Log::info('Full path: ' . Storage::disk('public')->path($path));
+            $doctor->foto_profil = $path;
         }
 
         $doctor->save(); // Simpan ke database
@@ -129,9 +134,19 @@ class DoctorController extends Controller
 
         // Update foto profil jika ada
         if ($request->hasFile('foto_profil')) {
+            // Hapus foto lama jika ada
+            if ($dokter->foto_profil) {
+                Log::info('Deleting old photo: ' . $dokter->foto_profil);
+                Log::info('Old file exists: ' . (Storage::disk('public')->exists($dokter->foto_profil) ? 'Yes' : 'No'));
+                Storage::disk('public')->delete($dokter->foto_profil);
+            }
+            
             $filename = time() . '_' . $request->file('foto_profil')->getClientOriginalName();
-            $request->file('foto_profil')->move(public_path('profile_dokter'), $filename);
-            $dokter->foto_profil = $filename;
+            $path = $request->file('foto_profil')->storeAs('doctors', $filename, 'public');
+            Log::info('Storing new photo: ' . $path);
+            Log::info('File exists: ' . (Storage::disk('public')->exists($path) ? 'Yes' : 'No'));
+            Log::info('Full path: ' . Storage::disk('public')->path($path));
+            $dokter->foto_profil = $path;
         }
 
         $dokter->save(); // Simpan perubahan ke database

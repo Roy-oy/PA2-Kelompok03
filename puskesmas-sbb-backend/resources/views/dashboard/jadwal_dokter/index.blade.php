@@ -90,7 +90,7 @@
                                 {{ $schedule->end_time }}
                             </td>
                             <td class="py-4 px-4 text-sm text-gray-500 whitespace-nowrap">
-                                {{ $schedule->cluster->name }}
+                                {{ $schedule->cluster->nama }}
                             </td>
                             <td class="py-4 px-4 text-sm text-gray-500 whitespace-nowrap">
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $schedule->status == 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">

@@ -120,7 +120,7 @@
                                     <option value="">-- Pilih Cluster --</option>
                                     @foreach($clusters as $cluster)
                                         <option value="{{ $cluster->id }}" {{ old('cluster_id') == $cluster->id ? 'selected' : '' }}>
-                                            {{ $cluster->name }}
+                                            {{ $cluster->nama }}
                                         </option>
                                     @endforeach
                                 </select>

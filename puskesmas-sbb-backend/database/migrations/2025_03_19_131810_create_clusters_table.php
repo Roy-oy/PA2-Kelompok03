@@ -14,7 +14,7 @@ class CreateClustersTable extends Migration
     {
         Schema::create('clusters', function (Blueprint $table) {
             $table->id(); // Primary key
-            $table->string('name'); // Nama cluster
+            $table->enum('nama', ['Klaster 1', 'Klaster 2', 'Klaster 3', 'Klaster 4', 'Klaster 5']); // Nama cluster
             $table->text('description')->nullable(); // Deskripsi cluster (opsional)
             $table->timestamps(); // Kolom created_at dan updated_at
         });
