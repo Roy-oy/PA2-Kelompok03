@@ -30,7 +30,7 @@ class ClusterController extends Controller
     {
         $request->validate([
             'nama' => 'required|in:Klaster 1,Klaster 2,Klaster 3,Klaster 4,Klaster 5',
-            'description' => 'nullable|string',
+            'description' => 'required|string',
         ]);
 
         Cluster::create($request->all());
@@ -55,7 +55,7 @@ class ClusterController extends Controller
     {
         $request->validate([
             'nama' => 'required|in:Klaster 1,Klaster 2,Klaster 3,Klaster 4,Klaster 5',
-            'description' => 'nullable|string',
+            'description' => 'required|string',
         ]);
 
         $cluster = Cluster::findOrFail($id);

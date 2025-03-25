@@ -134,34 +134,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Schedule Information -->
-            <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                <div class="px-6 py-4 border-b border-gray-200">
-                    <h3 class="text-lg font-semibold text-gray-800">Jadwal Praktek</h3>
-                </div>
-                <div class="p-6">
-                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <i class="fas fa-exclamation-circle text-yellow-400"></i>
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-sm text-yellow-700">
-                                    Informasi jadwal praktek dokter belum tersedia. Jadwal akan ditampilkan setelah diperbaharui oleh administrator.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="flex justify-center mt-4">
-                        <a href="#" class="inline-flex items-center px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors">
-                            <i class="fas fa-calendar-plus mr-2"></i>
-                            Tambah Jadwal Praktek
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
