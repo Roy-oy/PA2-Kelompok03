@@ -37,7 +37,7 @@
                     <!-- Deskripsi -->
                     <div>
                         <label for="description" class="block text-sm font-medium text-gray-700">Deskripsi</label>
-                        <textarea id="description" name="description" rows="3" 
+                        <textarea id="summernote" name="description" rows="3" 
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 @error('description') border-red-500 @enderror" 
                             placeholder="Masukkan deskripsi klaster">{{ old('description', $cluster->description) }}</textarea>
                         @error('description')
@@ -60,3 +60,11 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $('#summernote').summernote();
+    });
+  </script>
+@endpush
