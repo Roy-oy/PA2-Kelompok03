@@ -1,0 +1,2 @@
+D:/puskesmas-siborongborong/puskesmas-sbb-frontend/android/app/.cxx/Debug/24f431m1/armeabi-v7a/CMakeFiles/edit_cache.dir
+D:/puskesmas-siborongborong/puskesmas-sbb-frontend/android/app/.cxx/Debug/24f431m1/armeabi-v7a/CMakeFiles/rebuild_cache.dir

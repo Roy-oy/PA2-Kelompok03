@@ -23,7 +23,7 @@ class Doctor extends Model
         'tanggal_lahir',
         'alamat',
         'foto_profil',
-        'status'
+        'status'    
     ];
 
     // Format data otomatis
